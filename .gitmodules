@@ -1,0 +1,3 @@
+[submodule "governance"]
+	path = governance
+	url = ../submodule-demo-governance
