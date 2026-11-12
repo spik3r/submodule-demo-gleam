@@ -39,7 +39,8 @@ cd ~/code/submodule-demo-gleam
 
 The rehearsal creates temporary clones, demonstrates adoption of v2 and rollback
 to v1, and verifies each step. It does **not** change either source repo. It
-prints the temporary directory and leaves it available for inspection.
+prints the temporary directory and leaves it available for inspection. GitHub
+authentication and access to both private repositories are required.
 
 ## Run the app
 
@@ -52,8 +53,8 @@ gleam format --check src test
 ```
 
 This deliberately uses the JavaScript target, so Erlang is not needed. Gleam
-fetches its declared packages on first run. No compiler or dependencies were
-installed as part of creating this demo. See [verification](docs/VERIFICATION.md).
+fetches its declared packages on first run. Gleam 1.19.2 and Node 26.0.0 were used to compile, run and test this demo.
+See [verification](docs/VERIFICATION.md).
 The application is deliberately independent of the docs at runtime: governance
 is a development dependency, not something it downloads when starting.
 
@@ -70,14 +71,12 @@ is a development dependency, not something it downloads when starting.
 | After pulling a teammate’s app update | `git submodule update --init --recursive` |
 | Roll back | Select `policy-v1`, then commit the pointer again |
 
-For **this local-file demo**, clone/init commands need a command-scoped
-`-c protocol.file.allow=always`. Use it only with these known local repos;
-[the walkthrough](docs/WALKTHROUGH.md) gives exact commands. No global Git
-security settings are changed. Normal HTTPS/SSH submodules don’t need it.
+The governance submodule uses a standard HTTPS GitHub URL. No local-file
+protocol override or global Git security setting is needed.
 
 ## What Git actually stores
 
-- `.gitmodules`: submodule path and clone URL. Here it is a relative sibling URL.
+- `.gitmodules`: submodule path and clone URL. Here it is a cloneable HTTPS GitHub URL.
 - A **gitlink** (mode `160000`): the selected governance commit ID in the app tree.
 - The governance repo owns its files and history. The app records the commit,
   not an ordinary copied directory of those files.
@@ -98,9 +97,23 @@ in ordinary builds: it selects a moving remote branch instead of the app's pin.
 
 ## Sharing this demo
 
-Both repositories are **local only**. Copying just the app folder is not a
-portable share: Git history and the sibling governance repo are needed. Prefer
-publishing both repos together under one owner (only when you choose to), or
-sharing both histories as Git bundles. The relative submodule URL works when the
-remote repos keep these sibling names under the same parent. Otherwise update
-`.gitmodules`, commit it, and run `git submodule sync --recursive` in existing clones.
+Both repositories are **private** on GitHub:
+
+- [Governance policy](https://github.com/spik3r/submodule-demo-governance)
+- [Gleam application](https://github.com/spik3r/submodule-demo-gleam)
+
+Invite your friend as a read collaborator to **both** repositories before they
+clone. A link alone does not grant access. They need GitHub authentication for
+HTTPS (for example, GitHub CLI or an installed credential manager). Never put a
+token in `.gitmodules`.
+
+```sh
+git clone --recurse-submodules https://github.com/spik3r/submodule-demo-gleam.git
+cd submodule-demo-gleam
+./scripts/rehearse.sh
+```
+
+GitHub displays the governance entry as a link to the pinned commit. A downloaded
+ZIP is not equivalent to a recursive Git clone and will not populate submodules.
+If you later move the governance repository, update `.gitmodules`, commit it,
+and run `git submodule sync --recursive` in existing clones.

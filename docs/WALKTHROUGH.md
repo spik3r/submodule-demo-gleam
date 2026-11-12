@@ -7,7 +7,7 @@ app clone, so the original demo stays pinned to v1 for your next presentation.
 
 ```sh
 DEMO=$(mktemp -d "${TMPDIR:-/tmp}/submodule-talk.XXXXXX")
-git -c protocol.file.allow=always clone --recurse-submodules   ~/code/submodule-demo-gleam "$DEMO/app"
+git clone --recurse-submodules https://github.com/spik3r/submodule-demo-gleam.git "$DEMO/app"
 cd "$DEMO/app"
 git config user.name "Submodule Demo"
 git config user.email "demo@example.invalid"
@@ -17,8 +17,8 @@ git submodule status
 
 The app has v1, even though the governance repo already has v2.
 For an existing clone that forgot `--recurse-submodules`, use:
-`git -c protocol.file.allow=always submodule update --init --recursive`.
-The `-c` option is limited to that command and trusted local demo sources.
+`git submodule update --init --recursive`.
+You need authenticated read access to both private GitHub repositories.
 
 ## 2. Show the pin
 
@@ -63,7 +63,7 @@ that policy in the consuming app. In a real team, review both as PRs.
 ```sh
 git -C governance checkout --detach policy-v1  # simulate stale working files
 git submodule status                          # leading + means not at recorded pin
-git -c protocol.file.allow=always submodule update --init --recursive
+git submodule update --init --recursive
 git -C governance describe --tags --exact-match # back to policy-v2
 ```
 

@@ -17,11 +17,19 @@ configuration changes. The app starts at `policy-v1` while governance main is
 
 ## Gleam app
 
-Gleam and Erlang were not installed on the selected Mac when this demo was
-created. Node is available. **The Gleam app has not been compiled or tested.**
-No software was installed. Once Gleam is available, run the three commands in
-the main README; they compile/test the JavaScript target using Node. Packages
-are declared in `gleam.toml`; the first dependency resolution will create a
-manifest, which a real application would then commit for reproducibility.
+Gleam **1.19.2** was installed via Homebrew at the user's request. Node **26.0.0**
+is used for the JavaScript target. Formatting passed; the test suite passed
+(**1 test, 0 failures**); running the app printed the expected greeting. The
+resolved dependency manifest is committed (`gleam_stdlib` 1.0.5, `gleeunit` 1.11.0).
 
-The Git demonstration does not depend on Gleam being installed.
+Homebrew installed its required dependencies too. Its Erlang linking step reported
+an existing `typer` executable conflict. That existing file was **not overwritten**.
+Gleam itself is installed and the JavaScript target works; this demo does not
+require Erlang. No global Git configuration was changed.
+
+## Hosted repositories
+
+Both repos are private on GitHub under `spik3r`. Governance tags v1/v2 are
+published before the app pointer. The submodule uses a token-free HTTPS URL.
+Fresh recursive clone, formatting, tests, app run and the Git rehearsal are
+verified after publication. Collaborators require access to both repositories.

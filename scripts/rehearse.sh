@@ -3,7 +3,7 @@ set -euo pipefail
 SOURCE=$(cd "$(dirname "$0")/.." && pwd)
 SANDBOX=$(mktemp -d "${TMPDIR:-/tmp}/submodule-rehearsal.XXXXXX")
 echo "Rehearsal workspace: $SANDBOX (retained for inspection)"
-git -c protocol.file.allow=always clone --recurse-submodules "$SOURCE" "$SANDBOX/app"
+git clone --recurse-submodules "$SOURCE" "$SANDBOX/app"
 cd "$SANDBOX/app"
 git config user.name 'Submodule Demo'
 git config user.email 'demo@example.invalid'
@@ -24,7 +24,7 @@ git commit -m 'Adopt governance policy v2'
 test "$(git ls-tree HEAD governance | awk '{print $3}')" = "$v2"
 echo 'PASS: app commit records v2 only after deliberate adoption'
 git -C governance checkout --detach policy-v1
-git -c protocol.file.allow=always submodule update --init --recursive
+git submodule update --init --recursive
 test "$(git -C governance rev-parse HEAD)" = "$v2"
 echo 'PASS: update restores the recorded pin rather than a moving branch'
 git -C governance checkout --detach policy-v1
