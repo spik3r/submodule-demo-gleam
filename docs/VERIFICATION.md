@@ -8,6 +8,9 @@ The automated rehearsal checks a real recursive clone, pin preservation after
 fetch, deliberate adoption and committed gitlink, restoring a stale submodule
 checkout from the app pin, and rollback. It only modifies temporary clones.
 
+Result: **all five rehearsal assertions passed**, including recursive clone,
+fetch/pin stability, adoption, restoration and rollback. `bash -n` passed.
+
 Both source repositories use a repository-local demo Git identity; no global Git
 configuration changes. The app starts at `policy-v1` while governance main is
 `policy-v2`. Both source working trees should be clean.
