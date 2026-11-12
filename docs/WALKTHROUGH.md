@@ -18,7 +18,7 @@ git submodule status
 The app has v1, even though the governance repo already has v2.
 For an existing clone that forgot `--recurse-submodules`, use:
 `git submodule update --init --recursive`.
-You need authenticated read access to both private GitHub repositories.
+Both demo repositories are public: no authentication is needed to clone.
 
 ## 2. Show the pin
 

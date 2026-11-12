@@ -29,7 +29,7 @@ require Erlang. No global Git configuration was changed.
 
 ## Hosted repositories
 
-Both repos are private on GitHub under `spik3r`. Governance tags v1/v2 are
+Both repos are public on GitHub under `spik3r`, as explicitly requested. Governance tags v1/v2 are
 published before the app pointer. The submodule uses a token-free HTTPS URL.
 Fresh recursive clone, formatting, tests, app run and the Git rehearsal are
-verified after publication. Collaborators require access to both repositories.
+verified after publication. Anonymous recursive cloning is verified with Git credentials disabled.

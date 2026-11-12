@@ -39,8 +39,7 @@ cd ~/code/submodule-demo-gleam
 
 The rehearsal creates temporary clones, demonstrates adoption of v2 and rollback
 to v1, and verifies each step. It does **not** change either source repo. It
-prints the temporary directory and leaves it available for inspection. GitHub
-authentication and access to both private repositories are required.
+prints the temporary directory and leaves it available for inspection. Both demo repositories are public, so no GitHub login is required to clone.
 
 ## Run the app
 
@@ -97,15 +96,14 @@ in ordinary builds: it selects a moving remote branch instead of the app's pin.
 
 ## Sharing this demo
 
-Both repositories are **private** on GitHub:
+Both repositories are **public** on GitHub:
 
 - [Governance policy](https://github.com/spik3r/submodule-demo-governance)
 - [Gleam application](https://github.com/spik3r/submodule-demo-gleam)
 
-Invite your friend as a read collaborator to **both** repositories before they
-clone. A link alone does not grant access. They need GitHub authentication for
-HTTPS (for example, GitHub CLI or an installed credential manager). Never put a
-token in `.gitmodules`.
+Share these links directly. Your friend can read and clone both repositories
+without a GitHub account. Write access is separate; making a repo public does
+not let everyone push changes. Never put a token in `.gitmodules`.
 
 ```sh
 git clone --recurse-submodules https://github.com/spik3r/submodule-demo-gleam.git
